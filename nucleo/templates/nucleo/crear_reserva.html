@@ -1,0 +1,31 @@
+{% extends 'nucleo/base.html' %}
+
+{% block title %}Reservar {{ sala.nombre }}{% endblock %}
+
+{% block content %}
+    <h1 class="mb-3">Reservar la {{ sala.nombre }}</h1>
+    <p class="text-muted">(La reserva durará 2 horas desde el momento de la confirmación)</p>
+
+    <form method="POST" class="mt-4">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="{{ form.rut_persona.id_for_label }}" class="form-label">{{ form.rut_persona.label }}</label>
+            <input 
+                type="text" 
+                name="{{ form.rut_persona.name }}" 
+                class="form-control" 
+                id="{{ form.rut_persona.id_for_label }}"
+                required
+            >
+            {% if form.rut_persona.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.rut_persona.errors }}
+                </div>
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Confirmar Reserva</button>
+        <a href="{% url 'nucleo:detalle_sala' sala.id %}" class="btn btn-secondary ms-2">Cancelar</a>
+    </form>
+{% endblock %}

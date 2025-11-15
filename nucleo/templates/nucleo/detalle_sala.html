@@ -1,0 +1,35 @@
+{% extends 'nucleo/base.html' %}
+
+{% block title %}Detalle de {{ sala.nombre }}{% endblock %}
+
+{% block content %}
+    <h1 class="mb-3">{{ sala.nombre }}</h1>
+    <p class="lead">Capacidad: {{ sala.capacidad }} personas</p>
+
+    {% if sala.disponibilidad == "Disponible" %}
+        <p>Estado: <span class="badge bg-success fs-6">Disponible</span></p>
+        <hr class="my-4">
+        <p>Esta sala está disponible para reservar.</p>
+        
+        <a href="{% url 'nucleo:crear_reserva' sala.id %}" class="btn btn-primary btn-lg">
+            Reservar esta Sala
+        </a>
+    
+    {% else %}
+        <p>Estado: <span class="badge bg-danger fs-6">Reservada</span></p>
+        <hr class="my-4">
+        <p>Esta sala está reservada.</p>
+        
+        {% if reserva %}
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Detalles de la Reserva</h4>
+                <p><strong>Hora de inicio:</strong> {{ reserva.hora_inicio }}</p>
+                <p class="mb-0"><strong>Hora de término:</strong> {{ reserva.hora_termino }}</p>
+            </div>
+        {% endif %}
+        
+    {% endif %}
+
+    <hr class="my-4">
+    <a href="{% url 'nucleo:lista_salas' %}">← Volver a la lista</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'nucleo/base.html' %}
+
+{% block title %}Salas de Estudio{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4 border-bottom pb-2">Salas de Estudio Disponibles</h1>
+    
+    <div class="list-group">
+        {% for sala in lista_de_salas %}
+            
+            <a href="{% url 'nucleo:detalle_sala' sala.id %}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ sala.nombre }}</h5>
+                    
+                    {% if sala.disponibilidad == "Disponible" %}
+                        <span class="fw-bold text-success">Disponible</span>
+                    {% else %}
+                        <span class="fw-bold text-danger">Reservada</span>
+                    {% endif %}
+                </div>
+                <p class="mb-1 text-muted">Capacidad: {{ sala.capacidad }} personas</p>
+            </a>
+            
+        {% endfor %}
+    </div>
+{% endblock %}

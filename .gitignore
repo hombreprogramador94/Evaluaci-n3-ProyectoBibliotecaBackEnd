@@ -1,0 +1,12 @@
+#Entorno virtual
+venv/
+
+#Archivos de python compilados
+*.pyc
+__pycache__/
+
+#Archivos de entorno (Importante)
+.env
+
+#Base de datos de desarrollo.
+db.sqlite3
