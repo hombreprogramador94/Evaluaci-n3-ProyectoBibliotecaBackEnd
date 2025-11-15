@@ -7,7 +7,6 @@ from django.utils import timezone #Necesario para poder manejar fechas y horas.
 
 
 #Modelo sala:
-#[cite: 17]
 class Sala(models.Model):
     """
     Modelo para representar una Sala de estudio. 
